@@ -23,6 +23,12 @@ const AnimatedElement = forwardRef<HTMLDivElement, AnimatedElementProps>(
                 animation === 'scale-in' ? 'scale(0.95)' : 'none',
       transition: `opacity 0.6s ease-out, transform 0.6s ease-out`,
       transitionDelay: `${delay}ms`,
+      willChange: 'transform, opacity',
+      backfaceVisibility: 'hidden' as const,
+      WebkitBackfaceVisibility: 'hidden' as const,
+      WebkitTransform: isVisible ? 'translate3d(0,0,0)' : 
+                      animation === 'slide-up' ? 'translate3d(0,20px,0)' : 
+                      animation === 'scale-in' ? 'scale3d(0.95,0.95,1)' : 'translate3d(0,0,0)',
       ...(isVisible && {
         opacity: 1,
         transform: 'none'
@@ -36,7 +42,7 @@ const AnimatedElement = forwardRef<HTMLDivElement, AnimatedElementProps>(
           if (typeof ref === 'function') ref(node);
           else if (ref) ref.current = node;
         }}
-        className={cn(className)}
+        className={cn(className, isVisible ? 'animate-visible' : '')}
         style={style}
       >
         {children}

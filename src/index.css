@@ -42,10 +42,14 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply bg-background text-foreground font-montserrat;
+    -webkit-overflow-scrolling: touch;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -58,9 +62,31 @@
 
   .project-card-hover {
     @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-lg;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
   
   .btn-hover {
     @apply transition-all duration-200 hover:scale-105;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .animate-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    -webkit-transform: translate3d(0,0,0) !important;
+    transition: all 0.5s ease-in-out;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Prevent iOS Safari glitches with fixed elements */
+  .fixed {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 }
