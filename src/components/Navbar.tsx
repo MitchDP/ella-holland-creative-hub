@@ -32,9 +32,15 @@ const Navbar = () => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full",
         isScrolled ? "bg-white/90 backdrop-blur-sm shadow-sm py-2" : "bg-transparent py-6"
       )}
+      style={{
+        WebkitTransform: 'translateZ(0)',
+        transform: 'translateZ(0)',
+        WebkitBackfaceVisibility: 'hidden',
+        backfaceVisibility: 'hidden',
+      }}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link to="/" className="text-xl md:text-2xl font-playfair font-semibold tracking-wide">
@@ -42,7 +48,7 @@ const Navbar = () => {
         </Link>
         
         {/* Mobile menu button */}
-        <button className="md:hidden" onClick={toggleMenu}>
+        <button className="md:hidden" onClick={toggleMenu} aria-label="Toggle menu">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-6 w-6" 

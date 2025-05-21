@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
@@ -20,23 +20,34 @@ import EditProfile from "./pages/EditProfile";
 
 const queryClient = new QueryClient();
 
-const App = () => {
-  const isAdminRoute = window.location.pathname.startsWith('/admin');
+// Layout component to ensure consistent header/footer on all non-admin pages
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
 
+  return (
+    <>
+      {!isAdminRoute && <Navbar />}
+      <main>{children}</main>
+      {!isAdminRoute && <Footer />}
+    </>
+  );
+};
+
+const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          {!isAdminRoute && <Navbar />}
           <Routes>
             {/* Public Routes */}
-            <Route path="/" element={<Index />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:id" element={<ProjectDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/" element={<Layout><Index /></Layout>} />
+            <Route path="/projects" element={<Layout><Projects /></Layout>} />
+            <Route path="/projects/:id" element={<Layout><ProjectDetail /></Layout>} />
+            <Route path="/about" element={<Layout><About /></Layout>} />
+            <Route path="/contact" element={<Layout><Contact /></Layout>} />
             
             {/* Admin Routes */}
             <Route path="/admin" element={<AdminLogin />} />
@@ -46,9 +57,8 @@ const App = () => {
             <Route path="/admin/edit-profile" element={<EditProfile />} />
             
             {/* Catch-all Route */}
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
-          {!isAdminRoute && <Footer />}
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

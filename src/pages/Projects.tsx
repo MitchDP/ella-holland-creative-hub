@@ -22,9 +22,9 @@ const Projects = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-6 md:px-12 lg:px-24">
+    <div className="min-h-screen px-6 md:px-12 lg:px-24 pb-12">
       <div className="container mx-auto">
-        <AnimatedElement className="mb-12 text-center" animation="fade-in">
+        <AnimatedElement className="mb-12 text-center pt-12" animation="fade-in">
           <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-4">My Projects</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A collection of my work in digital design, social media strategy, and visual storytelling.

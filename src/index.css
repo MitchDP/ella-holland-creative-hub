@@ -50,6 +50,7 @@
     -webkit-overflow-scrolling: touch;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding-top: env(safe-area-inset-top); /* iOS notch support */
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -88,5 +89,20 @@
   .fixed {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Content padding to account for fixed header */
+  main {
+    padding-top: 80px; /* Adjust based on your header height */
+  }
+  
+  /* Fix for iOS fixed position elements */
+  @supports (-webkit-touch-callout: none) {
+    .fixed {
+      position: -webkit-sticky;
+      position: sticky;
+    }
   }
 }
