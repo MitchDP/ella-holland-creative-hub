@@ -42,7 +42,7 @@ const AdminDashboard = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
             <h1 className="font-playfair text-3xl font-bold mb-2">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Manage your portfolio projects</p>
+            <p className="text-muted-foreground">Manage your portfolio content</p>
           </div>
           <div className="flex gap-4">
             <Button onClick={() => navigate('/admin/add-project')}>
@@ -157,7 +157,7 @@ const AdminDashboard = () => {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="font-playfair text-xl font-semibold mb-4">Quick Links</h2>
+            <h2 className="font-playfair text-xl font-semibold mb-4">Profile Management</h2>
             <div className="space-y-4">
               <div className="p-4 border rounded-lg flex justify-between items-center">
                 <div>
@@ -170,20 +170,20 @@ const AdminDashboard = () => {
               </div>
               <div className="p-4 border rounded-lg flex justify-between items-center">
                 <div>
-                  <p className="font-medium">Manage Resume</p>
-                  <p className="text-sm text-muted-foreground">Update your resume PDF file</p>
+                  <p className="font-medium">Edit Profile</p>
+                  <p className="text-sm text-muted-foreground">Update your bio, contact info and resume</p>
                 </div>
-                <Button variant="outline" size="sm" onClick={() => alert('Resume management feature coming soon')}>
-                  Manage
+                <Button variant="outline" size="sm" onClick={() => navigate('/admin/edit-profile')}>
+                  Edit
                 </Button>
               </div>
-              <div className="p-4 border rounded-lg flex justify-between items-center">
+              <div className="p-4 border rounded-lg flex justify-between items-center bg-pink-light/10">
                 <div>
-                  <p className="font-medium">Edit About Page</p>
-                  <p className="text-sm text-muted-foreground">Update your bio and skills</p>
+                  <p className="font-medium">Connect Storage</p>
+                  <p className="text-sm text-muted-foreground">Link to Supabase/Firebase for media storage</p>
                 </div>
-                <Button variant="outline" size="sm" onClick={() => alert('About page editor coming soon')}>
-                  Edit
+                <Button variant="outline" size="sm" onClick={() => alert('Storage integration coming soon')}>
+                  Connect
                 </Button>
               </div>
             </div>

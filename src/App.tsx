@@ -15,6 +15,8 @@ import Contact from "./pages/Contact";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AddProject from "./pages/AddProject";
+import EditProject from "./pages/EditProject";
+import EditProfile from "./pages/EditProfile";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,8 @@ const App = () => {
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/add-project" element={<AddProject />} />
+            <Route path="/admin/edit-project/:id" element={<EditProject />} />
+            <Route path="/admin/edit-profile" element={<EditProfile />} />
             
             {/* Catch-all Route */}
             <Route path="*" element={<NotFound />} />
