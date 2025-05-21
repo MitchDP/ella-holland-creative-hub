@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 import Button from '@/components/Button';
 import { sampleProjects } from '@/data/projects';
 import { Project } from '@/components/ProjectCard';
+import AnimatedElement from '@/components/AnimatedElement';
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,7 +28,7 @@ const ProjectDetail = () => {
         <div className="text-center">
           <h1 className="font-playfair text-2xl mb-4">Project Not Found</h1>
           <p className="mb-6 text-muted-foreground">The project you're looking for doesn't exist or has been removed.</p>
-          <Button as={Link} to="/projects">
+          <Button to="/projects">
             Back to Projects
           </Button>
         </div>
@@ -51,7 +52,7 @@ const ProjectDetail = () => {
           Back to Projects
         </Link>
 
-        <div className="max-w-4xl mx-auto">
+        <AnimatedElement animation="fade-in" className="max-w-4xl mx-auto">
           <header className="mb-8">
             <div className="inline-block px-3 py-1 bg-cream text-secondary-foreground text-sm rounded-full mb-4">
               {project.category}
@@ -96,33 +97,34 @@ const ProjectDetail = () => {
               The design elements have since been incorporated into the broader brand guidelines.
             </p>
           </div>
-        </div>
+        </AnimatedElement>
 
         {relatedProjects.length > 0 && (
-          <div className="mt-16">
+          <AnimatedElement animation="fade-in" delay={300} className="mt-16">
             <h2 className="font-playfair text-2xl font-semibold mb-6">Related Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedProjects.map(related => (
-                <Link
-                  key={related.id}
-                  to={`/projects/${related.id}`}
-                  className="group block"
-                >
-                  <div 
-                    className="aspect-[4/3] w-full bg-cover bg-center rounded-lg overflow-hidden project-card-hover"
-                    style={{ backgroundImage: `url(${related.imageUrl})` }}
+              {relatedProjects.map((related, index) => (
+                <AnimatedElement key={related.id} animation="slide-up" delay={index * 150}>
+                  <Link
+                    to={`/projects/${related.id}`}
+                    className="group block"
                   >
-                    <div className="bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-full h-full flex items-end p-4">
-                      <div>
-                        <h3 className="text-white font-playfair font-medium">{related.title}</h3>
-                        <p className="text-white/80 text-sm">{related.category}</p>
+                    <div 
+                      className="aspect-[4/3] w-full bg-cover bg-center rounded-lg overflow-hidden project-card-hover"
+                      style={{ backgroundImage: `url(${related.imageUrl})` }}
+                    >
+                      <div className="bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-full h-full flex items-end p-4">
+                        <div>
+                          <h3 className="text-white font-playfair font-medium">{related.title}</h3>
+                          <p className="text-white/80 text-sm">{related.category}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </AnimatedElement>
               ))}
             </div>
-          </div>
+          </AnimatedElement>
         )}
       </div>
     </div>

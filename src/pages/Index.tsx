@@ -34,15 +34,12 @@ const Index = () => {
           </AnimatedElement>
           <AnimatedElement className="flex-1 order-1 md:order-2" animation="fade-in" delay={300}>
             <div className="relative">
-              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden mx-auto border-4 border-pink-light shadow-lg">
+              <div className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden mx-auto border-4 border-pink-light shadow-lg">
                 <img 
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                   alt="Ella Holland" 
                   className="w-full h-full object-cover"
                 />
-              </div>
-              <div className="absolute -bottom-4 -right-4 md:-bottom-8 md:-right-8 bg-cream-dark/30 backdrop-blur-sm rounded-xl p-4 shadow-md">
-                <p className="text-sm md:text-base font-medium">180K+ TikTok Followers</p>
               </div>
             </div>
           </AnimatedElement>
@@ -55,7 +52,7 @@ const Index = () => {
           <AnimatedElement className="max-w-3xl mx-auto text-center">
             <h2 className="font-playfair text-3xl md:text-4xl font-semibold mb-6">About Ella</h2>
             <p className="text-lg mb-6 leading-relaxed">
-              Ella Holland is a passionate and organized digital designer and content strategist based in Oregon. With international experience in Paris and Bali, and a background in Design & Innovation Management, she blends storytelling with digital branding to create impactful visuals. She's grown a TikTok audience of over 180,000 followers and thrives at the intersection of creativity and connection.
+              Ella Holland is a passionate and organized digital designer and content strategist based in Oregon. With international experience in Paris and Bali, and a background in Design & Innovation Management, she blends storytelling with digital branding to create impactful visuals. She thrives at the intersection of creativity and connection.
             </p>
             <Button to="/about">Learn More About Me</Button>
           </AnimatedElement>

@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 
 interface ScrollAnimationOptions {
@@ -17,12 +16,26 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
     const currentElement = elementRef.current;
     if (!currentElement) return;
 
+    // If element has already been animated and once is true, keep it visible
+    if (hasAnimatedRef.current && once) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && (!once || !hasAnimatedRef.current)) {
+          if (entry.isIntersecting) {
             setIsVisible(true);
             hasAnimatedRef.current = true;
+            
+            // If once is true, disconnect the observer after animation triggers
+            if (once) {
+              observer.disconnect();
+            }
+          } else if (!once) {
+            // Only hide the element if once is false
+            setIsVisible(false);
           }
         });
       },

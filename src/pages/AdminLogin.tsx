@@ -5,18 +5,14 @@ import Button from '@/components/Button';
 import { useToast } from '@/hooks/use-toast';
 
 const AdminLogin = () => {
-  const [credentials, setCredentials] = useState({
-    username: '',
-    password: '',
-  });
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setCredentials(prev => ({ ...prev, [name]: value }));
+    setPassword(e.target.value);
     setError('');
   };
 
@@ -27,7 +23,7 @@ const AdminLogin = () => {
 
     // Simple hardcoded authentication
     setTimeout(() => {
-      if (credentials.username === 'admin' && credentials.password === 'ruby') {
+      if (password === 'ruby') {
         // Store authentication state in session storage
         sessionStorage.setItem('isAuthenticated', 'true');
         toast({
@@ -36,10 +32,10 @@ const AdminLogin = () => {
         });
         navigate('/admin/dashboard');
       } else {
-        setError('Invalid username or password');
+        setError('Incorrect password');
         toast({
           title: "Login failed",
-          description: "Please check your credentials and try again",
+          description: "Incorrect password",
           variant: "destructive",
         });
       }
@@ -63,21 +59,6 @@ const AdminLogin = () => {
           )}
           
           <div>
-            <label htmlFor="username" className="block text-sm font-medium mb-2">
-              Username
-            </label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              required
-              value={credentials.username}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-light"
-            />
-          </div>
-
-          <div>
             <label htmlFor="password" className="block text-sm font-medium mb-2">
               Password
             </label>
@@ -86,9 +67,10 @@ const AdminLogin = () => {
               name="password"
               type="password"
               required
-              value={credentials.password}
+              value={password}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-light"
+              placeholder="Enter password"
             />
           </div>
 
@@ -99,8 +81,7 @@ const AdminLogin = () => {
 
         <div className="mt-6 text-center">
           <p className="text-sm text-muted-foreground">
-            <span className="block mb-1">Demo Credentials:</span>
-            Username: admin | Password: ruby
+            <span className="block mb-1">Demo Password: ruby</span>
           </p>
         </div>
       </div>

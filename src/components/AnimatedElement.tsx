@@ -15,7 +15,7 @@ interface AnimatedElementProps {
 
 const AnimatedElement = forwardRef<HTMLDivElement, AnimatedElementProps>(
   ({ children, className, animation = 'fade-in', delay = 0, threshold = 0.1, once = true, as: Component = 'div' }, ref) => {
-    const { ref: animationRef, isVisible } = useScrollAnimation({ threshold, once });
+    const { ref: animationRef, isVisible } = useScrollAnimation({ threshold, once: true }); // Force once: true
 
     const style = {
       opacity: 0,
@@ -23,10 +23,10 @@ const AnimatedElement = forwardRef<HTMLDivElement, AnimatedElementProps>(
                 animation === 'scale-in' ? 'scale(0.95)' : 'none',
       transition: `opacity 0.6s ease-out, transform 0.6s ease-out`,
       transitionDelay: `${delay}ms`,
-      ...isVisible && {
+      ...(isVisible && {
         opacity: 1,
         transform: 'none'
-      }
+      })
     };
 
     return (

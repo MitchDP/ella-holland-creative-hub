@@ -1,7 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ProjectCard, { Project } from '@/components/ProjectCard';
 import { sampleProjects } from '@/data/projects';
+import AnimatedElement from '@/components/AnimatedElement';
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>(sampleProjects);
@@ -20,46 +21,18 @@ const Projects = () => {
     }
   };
 
-  // Animation effect on scroll
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach((el) => {
-      el.classList.add('opacity-0');
-      observer.observe(el);
-    });
-
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
-
   return (
     <div className="min-h-screen pt-24 pb-12 px-6 md:px-12 lg:px-24">
       <div className="container mx-auto">
-        <header className="mb-12 text-center animate-on-scroll">
+        <AnimatedElement className="mb-12 text-center" animation="fade-in">
           <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-4">My Projects</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A collection of my work in digital design, social media strategy, and visual storytelling.
           </p>
-        </header>
+        </AnimatedElement>
         
         {/* Category filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10 animate-on-scroll">
+        <AnimatedElement className="flex flex-wrap justify-center gap-2 mb-10" animation="fade-in" delay={200}>
           {categories.map((category) => (
             <button
               key={category}
@@ -73,19 +46,19 @@ const Projects = () => {
               {category}
             </button>
           ))}
-        </div>
+        </AnimatedElement>
         
         {/* Projects grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.length > 0 ? (
             projects.map((project, index) => (
-              <div 
-                key={project.id} 
-                className="animate-on-scroll"
-                style={{ animationDelay: `${index * 100}ms` }}
+              <AnimatedElement 
+                key={project.id}
+                animation="slide-up"
+                delay={index * 100}
               >
                 <ProjectCard project={project} />
-              </div>
+              </AnimatedElement>
             ))
           ) : (
             <div className="col-span-full text-center py-12">
